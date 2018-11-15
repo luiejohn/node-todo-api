@@ -21,7 +21,7 @@ app.post('/todos', (req, res)=>{
     });
 });
 
-app.post('/mypath', (req, res)=>{
+app.post('/todos', (req, res)=>{
     var user = new User({
         name: req.body.name,
         lastName: req.body.lastName
@@ -30,6 +30,14 @@ app.post('/mypath', (req, res)=>{
     user.save().then((doc)=>{
         res.send(doc);
     }, (e)=>{
+        res.status(400).send(e);
+    });
+});
+
+app.get('/todos', (req, res)=>{
+    Todo.find().then((todos)=>{
+        res.send(todos);
+    }, (err)=>{
         res.status(400).send(e);
     });
 });
